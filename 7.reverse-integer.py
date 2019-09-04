@@ -45,6 +45,10 @@
 #
 class Solution:
     def reverse(self, x: int) -> int:
+        # overflow judgement, not here. may overflow after reverse
+        if x == 0:
+            return 0     
+
         # convert int to str and list
         res  = list(str(x))
         
@@ -61,5 +65,10 @@ class Solution:
             res.insert(0, '-')
             # remove the last element '-' 
             res.pop()
-       
-        return int(str(res))
+        
+        resint = int(''.join(res))
+        # after reverse, do overflow judgement, not at the entry of the function
+        if resint <= -2**31 or resint >= 2**31 -1:
+            return 0
+        else:
+            return resint
